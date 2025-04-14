@@ -1,0 +1,104 @@
+
+<app-navbar></app-navbar>
+
+<!-- Styles remain unchanged -->
+
+<div class="container-fluid"
+  style="padding: 2% 0; background: url('assets/files/wall.jpg') no-repeat center center; background-attachment: fixed; background-size: cover; width: 100%; height: auto;">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body input-group-addon grad">
+          <form name="productForm">
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold text-center">Add Product</h2>
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold text-center">Update Product</h2>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Product Field -->
+            <div class="form-group">
+              <label><b>Product</b><span class="required-field">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-box"></i></div>
+                </div>
+                <input type="text" name="product" [(ngModel)]="form.data.product" class="form-control"
+                  placeholder="Enter Product" (keydown)="filterInput($event, 'errorMessageproduct', 20, 'char')">
+              </div>
+              <span *ngIf="form.inputerror.product" class="alertRedColor">{{ form.inputerror.product }}</span>
+              <span *ngIf="errorMessageproduct" class="alertRedColor">{{ errorMessageproduct }}</span>
+            </div>
+
+            <!-- Transaction Date -->
+            <div class="form-group">
+              <label><b>Transaction Date</b><span class="required-field">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                </div>
+                <input type="date" name="transactionDate" [value]="form.data.transactionDate | date :'yyyy-MM-dd'"
+                  (input)="form.data.transactionDate=parseDate($event.target.value)" class="form-control" required />
+              </div>
+              <span *ngIf="form.inputerror.transactionDate" class="alertRedColor">{{ form.inputerror.transactionDate }}</span>
+            </div>
+
+            <!-- Customer Name -->
+            <div class="form-group">
+              <label><b>Customer Name</b><span class="required-field">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="text" name="customerName" [(ngModel)]="form.data.customerName" class="form-control"
+                  placeholder="Enter Customer Name" (keydown)="filterInput($event, 'errorMessagecustomerName', 20, 'char')">
+              </div>
+              <span *ngIf="form.inputerror.customerName" class="alertRedColor">{{ form.inputerror.customerName }}</span>
+              <span *ngIf="errorMessagecustomerName" class="alertRedColor">{{ errorMessagecustomerName }}</span>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <label><b>Quantity</b><span class="required-field">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-sort-numeric-up"></i></div>
+                </div>
+                <input type="text" name="quantity" [(ngModel)]="form.data.quantity" class="form-control"
+                  placeholder="Enter Quantity" (keydown)="filterInput($event, 'errorMessagequantity', 10, 'int')">
+              </div>
+              <span *ngIf="form.inputerror.quantity" class="alertRedColor">{{ form.inputerror.quantity }}</span>
+              <span *ngIf="errorMessagequantity" class="alertRedColor">{{ errorMessagequantity }}</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-2 pb-3 justify-content-center">
+              <div class="col-md-4">
+                <button *ngIf="!form.data.id" (click)="onUpload()" class="btn btn-success">Save</button>
+              </div>
+              <div class="col-md-4">
+                <button *ngIf="form.data.id" (click)="onUpload()" class="btn btn-success">Update</button>
+              </div>
+              <div class="col-md-4">
+                <a class="btn btn-warning" type="button" [routerLink]="['/cargtviewlist']">List</a>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+```
+
+Let me know if you also want me to update the TypeScript or form validation logic accordingly.
